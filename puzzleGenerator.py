@@ -14,3 +14,9 @@ Directions = [
 
 Letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ") #list of letters to fill empty spaces on the grid
 
+def generatePuzzleGrid(words) {
+     rows, cols = 15, 15
+     grid = [[' ' for _ in range(cols)] for _ in range(rows)]
+     
+     
+}

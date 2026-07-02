@@ -1,5 +1,4 @@
 import random
-import string
 
 Directions = [
      (0 , 1), #right direction
@@ -30,5 +29,9 @@ def generatePuzzleGrid(words):
                     if 0 <= currentRow < 15 and 0 <= currentColumn < 15:  #to avoid index errors
                          if grid[currentRow][currentColumn] == ' ': # checking if the grid is empty
                               grid[currentRow][currentColumn] = word[letter] # filling up the randomised chosen space with the letter from the word
-                              placed =  True # telling the loop that it is finished
-                              
+                              placed =  True # telling the loop that it is finished                          
+          
+          for r in range(15):
+               for c in range(15):
+                    if grid[r][c] == ' ':
+                         grid[r][c] = random.choice(Letters)

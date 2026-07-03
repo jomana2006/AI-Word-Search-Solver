@@ -59,7 +59,7 @@ def solvePuzzleGrid(grid, words):
 
 if __name__ == "__main__":
     from puzzleGenerator import generatePuzzleGrid
-    words = ["CAT", "DOG", "BIRD", "LION", "TIGER"]
+    words = ["KITTEN", "PUPPY", "ROBBIN", "LION", "TIGER"]
     grid = generatePuzzleGrid(words)
     for row in grid:
         print(" ".join(row))

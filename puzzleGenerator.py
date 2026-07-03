@@ -25,14 +25,14 @@ def generatePuzzleGrid(words):
     typeWriter("Generating puzzle...")
     
     rows, cols = 15, 15
-    grid = [[' ' for _ in range(cols)] for _ in range(rows)]
+    grid = [['.' for _ in range(cols)] for _ in range(rows)]
     
     max_attempts = 1000
-    attempts = 0
     
     for word in words:
           placed = False
-          typeWriter(f"{word} in grid: {any(word in ''.join(row) for row in grid)}") #temporary checking
+          attempts = 0
+          
           typeWriter("Placing word...")
           
           while (not placed and attempts < max_attempts):
@@ -40,13 +40,26 @@ def generatePuzzleGrid(words):
                row = random.randint(0, 14) # I generate a random row value from index 0 to 14
                col = random.randint(0, 14) # I generate a random column value from index 0 to 14
                dr, dc = random.choice(Directions) # I generate a random direction value as (dr, dc) from the list Directions
+               canPlace = True #checks if all letters fit
+               
                for letter in range(len(word)): #I loop through every letter in the word from the words list in the GUI file (or a temporary testing list in this file)
                     currentRow = row + (letter * dr)
                     currentColumn = col + (letter * dc)
-                    if 0 <= currentRow < 15 and 0 <= currentColumn < 15:  #to avoid index errors
-                         if grid[currentRow][currentColumn] == ' ' or grid[currentRow][currentColumn] == word[letter]: # checking if the grid is empty
-                              grid[currentRow][currentColumn] = word[letter] # filling up the randomised chosen space with the letter from the word
-                              placed =  True # telling the loop that it is finished
+                    if not (0 <= currentRow < 15 and 0 <= currentColumn < 15):  #to avoid index errors
+                         canPlace = False
+                         break
+                    if grid[currentRow][currentColumn] != '.' and grid[currentRow][currentColumn] != word[letter]: # checking if the grid is empty
+                         canPlace = False
+                         break
+               
+               if canPlace:
+                    for letter in range(len(word)):
+                         currentRow = row + (letter * dr)
+                         currentColumn = col + (letter * dc)
+                         grid[currentRow][currentColumn] = word[letter] # filling up the randomised chosen space with the letter from the word
+                    
+                    placed =  True # telling the loop that it is finished
+
     
     typeWriter("Words Placed!")
     
@@ -54,7 +67,7 @@ def generatePuzzleGrid(words):
     
     for r in range(15):
           for c in range(15):
-               if grid[r][c] == ' ':
+               if grid[r][c] == '.':
                     grid[r][c] = random.choice(Letters)
     
     typeWriter("Done!")
@@ -64,7 +77,7 @@ def generatePuzzleGrid(words):
 # temporary testing
                          
 if __name__ == "__main__":
-    Words = ["CAT", "DOG", "BIRD", "LION", "TIGER"]
+    Words = ["KITTEN", "PUPPY", "ROBBIN", "LION", "TIGER"]
     grid = generatePuzzleGrid(Words)
     for row in grid:
         print(" ".join(row))

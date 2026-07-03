@@ -32,7 +32,7 @@ def generatePuzzleGrid(words):
     
     for word in words:
           placed = False
-          
+          typeWriter(f"{word} in grid: {any(word in ''.join(row) for row in grid)}") #temporary checking
           typeWriter("Placing word...")
           
           while (not placed and attempts < max_attempts):
@@ -60,6 +60,8 @@ def generatePuzzleGrid(words):
     typeWriter("Done!")
     
     return grid
+           
+# temporary testing
                          
 if __name__ == "__main__":
     Words = ["CAT", "DOG", "BIRD", "LION", "TIGER"]

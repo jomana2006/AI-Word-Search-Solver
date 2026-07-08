@@ -64,14 +64,17 @@ def loadPuzzle(puzzle):
     galleryFrame.pack_forget()
     puzzleFrame.pack(fill=tk.BOTH, expand=True)
     
+    for widget in topFrame.winfo_children():
+        widget.destroy()  
+    
     lblPuzzleName = tk.Label(
-        puzzleFrame,
+        topFrame,
         text=puzzle,
         font=("Courier", 20, "bold"),
         bg=BG,
-        fg=TEXT_FG
+        fg=TEXT_FG,
     )
-    lblPuzzleName.place(x=250, y=10) 
+    lblPuzzleName.pack(pady=(10,0))
     
     displayGrid(currentGrid)
     displayWords(words)
@@ -132,7 +135,7 @@ def displayWords(words):
      for widget in rightFrame.winfo_children():
         widget.destroy()  
      wordsFrame = tk.Frame(rightFrame, bg=BG)
-     wordsFrame.pack(anchor="center", pady=(60, 5))
+     wordsFrame.pack(anchor="center", pady=(40, 5))
      
      for index, word in enumerate(words):
         row = index // 2    
@@ -250,6 +253,8 @@ window.geometry(f"{width}x{height}+{x}+{y}")
 welcomeFrame = tk.Frame(window, bg=BG)
 galleryFrame = tk.Frame(window, bg=BG)
 puzzleFrame  = tk.Frame(window, bg=BG)
+topFrame = tk.Frame(puzzleFrame, bg=BG)
+topFrame.pack(side=tk.TOP, fill=tk.X, pady=10)
 leftFrame    = tk.Frame(puzzleFrame, bg=BORDER, padx=1, pady=1)
 rightFrame   = tk.Frame(puzzleFrame, bg=BG)
 
